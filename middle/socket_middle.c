@@ -87,9 +87,9 @@ int main(int argc, char **argv)
     // 将IP写入文件
     FILE *fp;
     fp = fopen("./middle.txt", "w");
-    fputs("客户端IP: ", fp);
+    fputs("Client IP(C): ", fp);
     fputs(argv[1], fp);
-    fputs("\n服务器IP: ", fp);
+    fputs("\nServer IP(S): ", fp);
     fputs(argv[2], fp);
     fputs("\n\n", fp);
     fclose(fp);
@@ -207,7 +207,7 @@ void process_pkt(IP_T *ip_t, const struct pcap_pkthdr *pkthdr, const u_char *pac
             strncpy(plain_text, buf, 32);
             Contrary_AesEncrypt(plain_text, expansion_key2client, AES256_ROUND);
             
-            fputs("客户端->服务器: ", fp);
+            fputs("C->S: ", fp);
             fputs(plain_text, fp);
             fputs("\n", fp);
             //printf("客户端->服务器，明文：%s\n\n", plain_text);
@@ -283,7 +283,7 @@ void process_pkt(IP_T *ip_t, const struct pcap_pkthdr *pkthdr, const u_char *pac
             strncpy(plain_text, buf, 32);
             Contrary_AesEncrypt(plain_text, expansion_key2server, AES256_ROUND);
             // TODO: file
-            fputs("服务器->客户端: ", fp);
+            fputs("S->C: ", fp);
             fputs(plain_text, fp);
             fputs("\n", fp);
             //printf("服务器->客户端，明文：%s\n\n", plain_text);
